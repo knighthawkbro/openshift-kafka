@@ -40,6 +40,9 @@ items:
             image: ${IMAGE}
             command:
             - bin/kafka-server-start.sh
+            env:
+            - name: KAFKA_OPTS 
+              value: "-javaagent:/opt/kafka/jmx_prometheus_javaagent.jar=7071:/opt/kafka/prom-jmx-agent-config.yml"
             args:
             - config/server.properties
             - --override
@@ -53,6 +56,9 @@ items:
               name: kafka-logs
             ports:
             - containerPort: 9092
+              name: kafka
+            - containerPort: 7071
+              name: jmx_prometheus
           - name: apache-zookeeper
             image: ${IMAGE}
             command:
@@ -79,5 +85,7 @@ items:
         port: 9092
       - name: zookeeper
         port: 2181
+      - name: jmx_prometheus
+        port: 7071
       selector:
         deploymentconfig: ${NAME}
