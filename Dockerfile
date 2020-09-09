@@ -9,4 +9,4 @@ WORKDIR /opt/kafka
 VOLUME /tmp/kafka-logs /tmp/zookeeper
 ADD prom-jmx-agent-config.yml /opt/kafka/prom-jmx-agent-config.yml
 ADD https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.13.0/jmx_prometheus_javaagent-0.13.0.jar /opt/kafka/jmx_prometheus_javaagent.jar
-EXPOSE 2181 2888 3888 9092
+EXPOSE 2181 2888 3888 9092 7071

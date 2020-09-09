@@ -17,9 +17,9 @@ items:
     required: true
     value: apache-kafka
   - name: IMAGE
-    description: Image with Apache Kafka and Apache ZooKeeper
+    description: Image with Apache Kafka and Apache ZooKeeper & JMX_Exporter
     required: true
-    value: rondinif/openshift-kafka
+    value: knighthawkbro/openshift-kafka
   objects:
   - apiVersion: v1
     kind: DeploymentConfig
@@ -58,7 +58,7 @@ items:
             - containerPort: 9092
               name: kafka
             - containerPort: 7071
-              name: jmx_prometheus
+              name: jmx-prometheus
           - name: apache-zookeeper
             image: ${IMAGE}
             command:
@@ -85,7 +85,7 @@ items:
         port: 9092
       - name: zookeeper
         port: 2181
-      - name: jmx_prometheus
+      - name: jmx-prometheus
         port: 7071
       selector:
         deploymentconfig: ${NAME}
